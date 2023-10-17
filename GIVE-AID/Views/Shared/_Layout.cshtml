@@ -1,0 +1,198 @@
+﻿@{
+    var user = (GIVE_AID.Models.UserSession)HttpContext.Current.Session["USER_SESSION"];
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GIVE-AID</title>
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/Assets/Client/Main/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="~/Assets/Client/Main/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/Assets/Client/Main/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/Assets/Client/Main/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Bar Start -->
+    <div class="top-bar d-none d-md-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="top-bar-left">
+                        <div class="text">
+                            <i class="fa fa-phone-alt"></i>
+                            <p>+123 456 7890</p>
+                        </div>
+                        <div class="text">
+                            <i class="fa fa-envelope"></i>
+                            <p>info@example.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="top-bar-right">
+                        <div class="social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Bar End -->
+    <!-- Nav Bar Start -->
+    <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a href="@Url.Action("Index","Home", new { area = "" })" class="navbar-brand">Give-AID</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                    <a href="@Url.Action("Index","Home", new { area = "" })" class="nav-item nav-link active">Home</a>
+                    <a href="@Url.Action("Create","Donation", new { area = "" })" class="nav-item nav-link">Donate</a>
+                    <a href="@Url.Action("About","Home", new { area = "" })" class="nav-item nav-link">About</a>
+                    <a href="@Url.Action("Contact","Home", new { area = "" })" class="nav-item nav-link">Contact</a>
+                    <a href="@Url.Action("Index","News", new { area = "" })" class="nav-item nav-link">News</a>
+                    <div class="nav-item dropdown">
+                        @if (HttpContext.Current.Session["USER_SESSION"] != null)
+                        {
+                            <a class="nav-link dropdown-toggle " data-toggle="dropdown">
+                                @*<img src="@user.Avatar" class="rounded-circle px-2" height="35" alt="" />*@
+                                @*<img src="/Uploads/images/user.png" class="rounded-circle px-2" height="35" alt="" />*@
+                                @*"~/Assets/Server/Admin/assets/images/user.png"*@
+                                <span>@user.UserName</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                @if (Roles.IsUserInRole(user.UserName, "Admin"))
+                                {
+                                    <div>@Html.ActionLink("Dashboard", "Index", "HomeAdmin", new { area = "Admin" }, new { @class = "dropdown-item nav-item nav-link text-dark" })</div>
+                                    <div>@Html.ActionLink("My Profile", "Index", "Myprofile", new { area = "Admin" }, new { @class = "dropdown-item nav-item nav-link text-dark" })</div>
+                                }
+                                else if (Roles.IsUserInRole(user.UserName, "User"))
+                                {
+                                    @*<div>@Html.ActionLink("Dashboard", "Index", "HomeUser", new { area = "User" }, new { @class = "dropdown-item nav-item nav-link " })</div>
+                        <div>@Html.ActionLink("My Profile", "Index", "Myprofile", new { area = "Teacher" }, new { @class = "dropdown-item nav-item nav-link  " })</div>*@
+                                }
+                                <div>@Html.ActionLink("Logout", "Logout", "Accounts", new { area = "" }, new { @class = "nav-item nav-link text-dark " })</div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center gap-2 ">
+                                <div>
+                                    @Html.ActionLink("Login", "Login", "Accounts", new { area = "" }, new { @class = "nav-item nav-link" })
+                                </div>
+                                <div>
+                                    @Html.ActionLink("Register", "Register", "Accounts", new { area = "" }, new { @class = "nav-item nav-link" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Nav Bar End -->
+
+
+    <div class="body-content">
+        @RenderBody()
+    </div>
+
+    <!-- Footer Start -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-contact">
+                        <h2>Our Head Office</h2>
+                        <p><i class="fa fa-map-marker-alt"></i>123 Street, Yen Bai, Da Nang</p>
+                        <p><i class="fa fa-phone-alt"></i>+012 345 67890</p>
+                        <p><i class="fa fa-envelope"></i>info@example.com</p>
+                        <div class="footer-social">
+                            <a class="btn btn-custom" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-custom" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-custom" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-custom" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-custom" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-link">
+                        <h2>Popular Links</h2>
+                        <a href="">About Us</a>
+                        <a href="">Contact Us</a>
+                        <a href="">Popular Causes</a>
+                        <a href="">Upcoming Events</a>
+                        <a href="">Latest Blog</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-link">
+                        <h2>Useful Links</h2>
+                        <a href="">Terms of use</a>
+                        <a href="">Privacy policy</a>
+                        <a href="">Cookies</a>
+                        <a href="">Help</a>
+                        <a href="">FQAs</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="footer-newsletter">
+                        <h2>Send Invitation</h2>
+                        @using (Html.BeginForm("SendInvitation", "Accounts", FormMethod.Post))
+                        {
+                            <input class="form-control" type="email" name="emailAddress" id="emailAddress" required placeholder="Email goes here">
+                            <button type="submit" class="btn btn-custom">Submit</button>
+                            <label>Send invitation to your friends</label>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Assets/lib/easing/easing.min.js"></script>
+    <script src="~/Assets/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/Assets/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/Assets/lib/counterup/counterup.min.js"></script>
+    <script src="~/Assets/lib/parallax/parallax.min.js"></script>
+
+    <script src="~/Assets/Client/Main/lib/easing/easing.min.js"></script>
+    <script src="~/Assets/Client/Main/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/Assets/Client/Main/lib/waypoints/waypoints.min.js"></script>
+    <script src="~/Assets/Client/Main/lib/counterup/counterup.min.js"></script>
+    <script src="~/Assets/Client/Main/lib/parallax/parallax.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="~/Assets/Client/Main/mail/jqBootstrapValidation.min.js"></script>
+    <script src="~/Assets/Client/Main/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="~/Assets/Client/Main/js/main.js"></script>
+</body>
+</html>

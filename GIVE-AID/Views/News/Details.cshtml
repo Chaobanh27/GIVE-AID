@@ -1,0 +1,42 @@
+﻿@model GIVE_AID.Models.News
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>News</h2>
+            </div>
+            <div class="col-12">
+                <a href="">Home</a>
+                <a href="">News</a>
+                <a href="">Detail</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<section class="news mt-5">
+    <div class="container">
+        <div class="text-center mb-5 ">
+            <h1>@Model.Title</h1>
+            <div class="mt-3 "><p>By @Model.Author  |  <span class="text-black-50">@Model.CreatedDate</span></p></div>
+            <hr class="mx-auto w-50">
+        </div>
+        <div class="text w-75 mx-auto">
+            <h4>@Model.Description</h4>
+            @*dùng html.raw() để chuyển source html tags từ ckeditor sang plain text*@
+            <p>
+                @Html.Raw(@Model.Content)
+            </p>
+        </div>
+        <hr class="mx-auto w-50">
+    </div>
+</section>
+
+
+

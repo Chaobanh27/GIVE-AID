@@ -1,0 +1,34 @@
+﻿/* form start */
+.form-login-section .container {
+    height: max-content;
+    margin-top: 50px;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+}
+.form-login-section .container {
+    padding: 50px;
+    background: #20212A;
+}
+.form-login-section .container .form-header .form-icon{
+    border-radius: 50%;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    padding: 15px;
+    font-size: 50px;
+    background-color: #F3C151;
+    color: white;
+}
+.form-login-section .form-check {
+    padding-left:0;
+}
+.form-login-section .btn-sign-in {
+    background-color: #F3C151;
+    border: none;
+    color: white;
+    padding: 10px 0px;
+    width: 100%;
+}
+/* form end */
+
+
+

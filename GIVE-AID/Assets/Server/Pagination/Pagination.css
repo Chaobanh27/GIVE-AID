@@ -1,0 +1,27 @@
+﻿.pagination{
+    display:flex;
+    justify-content:end;
+    list-style:none;
+    padding:0;
+}
+.page-item{
+    margin:0 5px;
+}
+.page-item a{
+    display:block;
+    padding:5px 10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    color:#0D6EFD;
+    text-decoration:none;
+}
+.page-item.active{
+    color:#fff;
+}
+.page-item.active a{
+    background-color:#0D6EFD;
+}
+/*.page-item.disabled a{
+    color:#ccc;
+    cursor:not-allowed;
+}*/

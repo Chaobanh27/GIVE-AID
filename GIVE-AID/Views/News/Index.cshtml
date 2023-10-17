@@ -1,0 +1,115 @@
+﻿@model IEnumerable<GIVE_AID.Models.News>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/Assets/Client/News/css/NewsIndex.css">
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>News</h2>
+            </div>
+            <div class="col-12">
+                <a href="">Home</a>
+                <a href="">News</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<section class="news ">
+    <div class="container ">
+        <div class="news-header">
+            <h3>News</h3>
+        </div>
+        <div class="row">
+            <div class="news-left-content col-lg-7 col-sm-12   ">
+                <!-- Carousel Start -->
+                <div class="carousel">
+                    <div class="container-fluid">
+                        <div class="owl-carousel">
+                            @foreach (var item in Model.Where(n => n.TypeOfNews == "Car" && n.Status == true))
+                            {
+                                <a href="@Url.Action("Details",new { id = item.Id })" class="carousel-item">
+                                    <div class="carousel-img">
+                                        <img src="@item.ImagePath" alt="Image">
+                                    </div>
+                                    <div class="carousel-text">
+                                        <p>@item.Title</p>
+                                    </div>
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news-right-content col-lg-5 col-sm-12 ">
+                <div class="row ">
+                    @foreach (var item in Model.Where(n => n.TypeOfNews == "Science" && n.Status == true))
+                    {
+                        <a href="@Url.Action("Details",new { id = item.Id })" class="col-lg-12 text-decoration-none text-black d-flex ">
+                            <div class="news-img ">
+                                <img src="@item.ImagePath" alt="">
+                            </div>
+                            <div class="">
+                                <div class="news-content ms-3">
+                                    <span class="news-date">@item.CreatedDate</span>
+                                    <p>@item.Title</p>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- news end -->
+<!-- news category start -->
+<section class="news-category mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 " style="margin-right: auto;">
+                <div class="news-category-header mb-3">
+                    <h3>Discover Our Latest News</h3>
+                </div>
+                @foreach (var item in Model.Where(n => n.TypeOfNews == "Science" && n.Status == true))
+                {
+                    <a href="@Url.Action("Details",new { id = item.Id })" class="row news-item text-decoration-none text-black mb-5">
+                        <div class="news-image col-lg-4 col-sm-4 ">
+                            <img src="@item.ImagePath" alt="" srcset="" class="w-100">
+                        </div>
+                        <div class="news-body col-lg-8 col-sm-8 ">
+                            <div class="news-title mb-3">
+                                <h5>@item.Title</h5>
+                            </div>
+                            <div class="news-description mb-3">
+                                <p>@item.Description</p>
+                            </div>
+                            <div class="news-footer d-flex">
+                                <p class="author text-muted">@item.Author</p>
+                                <p class="created-date text-muted">@item.CreatedDate</p>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+            <div class="col-lg-4">
+                <ul class="list-group ">
+                    <li class="list-group-item active border-0" aria-current="true" style="background-color: #F3C151;">Popular Posts</li>
+                    @foreach (var item in Model.Where(n => n.Status == true))
+                    {
+                        <li class="list-group-item border-0"><a href="@Url.Action("Details",new { id = item.Id })" class="text-decoration-none ">@item.Title</a></li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</section>
+<!-- news category end -->

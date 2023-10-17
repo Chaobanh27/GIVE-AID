@@ -1,0 +1,28 @@
+﻿.form-register-section{
+    margin-top: 104px;
+}
+.form-register-section .container{
+    height: max-content;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+}
+.form-register-section .container {
+    padding: 50px;
+    background: #20212A;
+}
+.form-register-section .container .form-icon{
+    border-radius: 50%;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    padding:15px;
+    font-size: 50px;
+    background-color: #F3C151;
+    color: white;
+}
+.form-register-section .btn-sign-up{
+    background-color: #F3C151;
+    border: none;
+    color: white;
+    padding: 10px 0px;
+    width: 100%;
+}

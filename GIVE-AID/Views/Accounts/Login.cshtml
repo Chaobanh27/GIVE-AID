@@ -1,0 +1,95 @@
+﻿@model GIVE_AID.Models.LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var errorCount = ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count();
+}
+<link href="~/Assets/Client/Login/Login.css" rel="stylesheet">
+
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Login</h2>
+            </div>
+            <div class="col-12">
+                <a href="">Home</a>
+                <a href="">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- form section start-->
+<section class="form-login-section">
+    <div class="container col-sm-6 col-lg-4">
+        @using (Html.BeginForm("Login", "Accounts", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-header text-center text-uppercase">
+                <div class="form-icon mb-3">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <h1 class="text-light">Login</h1>
+            </div>
+            <div class="form-outline form-floating mb-4 mt-4">
+                @Html.TextBoxFor(model => model.Username, null, new { @class = "form-control", @placeholder = "Username", @autofocus = "autofocus" })
+                @*<label class="form-label" for="sign-in-username"><i class="fa-solid fa-user"></i> | Username</label>*@
+                @*@Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })*@
+            </div>
+
+            <div class="form-outline form-floating mb-4 input-group">
+                @Html.TextBoxFor(model => model.Password, null, new { @class = "form-control ", id = "password-field", @placeholder = "Password", @type = "password" })
+                <div class="input-group-append">
+                    <button id="toggle-password" style="border-radius: 0px 15px 15px 0px; background-color: #F3C151" class="btn" type="button">
+                        <i id="eye-icon" class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+                @*<label class="form-label" for="sign-in-password"><i class="fa-solid fa-lock"></i> | Password</label>*@
+                @*@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })*@
+            </div>
+            if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Any())
+            {
+                <p class="text-danger">There are @errorCount errors please correct them </p>
+            }
+            @Html.ValidationSummary(false, null, new { @class = "text-danger" })
+            <div class="d-flex justify-content-between mb-4">
+
+                <div class="d-flex justify-content-between ">
+                    <div class="form-check ">
+                        @Html.CheckBoxFor(model => model.RememberMe, new { id = "rememberMe" })
+                        @Html.LabelFor(model => model.RememberMe, new { @class = "control-label text-light" })
+                    </div>
+                </div>
+
+                <div class=" forgot ">
+                    <a href="@Url.Action("ForgotPassword","Accounts")">Forgot password?</a>
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn-sign-in">Sign in</button>
+        }
+    </div>
+</section>
+<!-- form section end-->
+
+<script>
+    var togglePassword = document.getElementById("toggle-password");
+    var passwordField = document.getElementById("password-field");
+    var eyeIcon = document.getElementById("eye-icon")
+
+    togglePassword.addEventListener("click", function () {
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            eyeIcon.classList.remove("fa-eye")
+            eyeIcon.classList.add("fa-eye-slash")
+        }
+        else {
+            passwordField.type = "password";
+            eyeIcon.classList.add("fa-eye")
+        }
+    });
+</script>

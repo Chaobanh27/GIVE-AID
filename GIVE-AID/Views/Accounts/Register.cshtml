@@ -1,0 +1,131 @@
+﻿@model GIVE_AID.Models.RegisterModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var errorCount = ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Count();
+}
+
+<link rel="stylesheet" href="~/Assets/Client/Register/Register.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Register</h2>
+            </div>
+            <div class="col-12">
+                <a href="">Home</a>
+                <a href="">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<section class="form-register-section">
+
+    <div class="container col-sm-6 col-lg-6 mt-5 mb-5">
+
+        @using (Html.BeginForm("Register", "Accounts", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-header text-center text-uppercase mb-4">
+                <div class="form-icon mb-3">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                </div>
+                <h1 class="text-light">Register</h1>
+            </div>
+            <div class="form-outline mb-4 form-floating">
+                @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder = "Fullname" })
+            </div>
+
+            <div class="form-outline mb-4 form-floating">
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
+            </div>
+
+            <div class="row ">
+
+                <div class="col-lg-6 col-sm-12 mb-4">
+                    <div class="form-outline form-floating">
+                        @Html.TextBoxFor(model => model.DateOfBirth, "{0:yyyy-MM-ddTHH:mm:ss}", new { @class = "form-control mb-4", placeholder = "Date of Birth", @Type = "datetime-local" })
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-sm-12 mb-4">
+                    @Html.DropDownListFor(model => model.Gender, new SelectList(new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Male", Value = "Male" },
+                        new SelectListItem { Text = "Female", Value = "Female" }
+                    }, "Value", "Text"), "Gender", new { @class = "form-select ",style = "width: 100%" })
+                </div>
+            </div>
+
+            <div class="form-outline mb-4 form-floating">
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email address" })
+            </div>
+
+            <div class="row ">
+
+                <div class="col-lg-6 col-sm-12 mb-4">
+                    <div class="form-outline form-floating">
+                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control", placeholder = "Phone" })
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-sm-12 mb-4">
+                    <div class="form-outline form-floating">
+                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "Address" })
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-outline mb-4 form-floating input-group">
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "password-field", placeholder = "Password" })
+                <div class="input-group-append">
+                    <button id="toggle-password" style="border-radius: 0px 15px 15px 0px; background-color: #F3C151" class="btn" type="button">
+                        <i id="eye-icon" class="fa-solid fa-eye"></i>
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="form-outline mb-4 form-floating">
+                @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Re-enter Password" })
+
+            </div>
+            <div class="form-outline mb-4 form-floating">
+                @Html.TextBoxFor(model => model.CreatedDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { @class = "form-control", @readonly = "readonly", placeholder = "CreatedDate", @Type = "datetime-local", @Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss") })
+            </div>
+            if (ViewData.ModelState.Values.Where(v => v.Errors.Count != 0).Any())
+            {
+                <p class="text-danger">There are @errorCount errors please correct them </p>
+            }
+            @Html.ValidationSummary(false, null, new { @class = "text-danger" })
+            <button type="submit" class="btn-sign-up mb-4">Sign up</button>
+        }
+    </div>
+</section>
+
+<script>
+    var togglePassword = document.getElementById("toggle-password");
+    var passwordField = document.getElementById("password-field");
+    var eyeIcon = document.getElementById("eye-icon")
+
+    togglePassword.addEventListener("click", function () {
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            eyeIcon.classList.remove("fa-eye")
+            eyeIcon.classList.add("fa-eye-slash")
+        }
+        else {
+            passwordField.type = "password";
+            eyeIcon.classList.add("fa-eye")
+        }
+    });
+
+</script>
+

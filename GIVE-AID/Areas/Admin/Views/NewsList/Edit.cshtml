@@ -1,0 +1,73 @@
+﻿@model GIVE_AID.Models.News
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="container" style="margin-top:100px;">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Description)
+            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.ImagePath)
+            @Html.TextBoxFor(m => m.ImagePath, new { @class = "form-control", @id = "input-image" })
+            <input type="button" value="Tải Ảnh" onclick="BrowseServer('input-image'); " />
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Content)
+            @Html.TextAreaFor(m => m.Content, new { @class = "form-control", @id = "input-content" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Author)
+            @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.TypeOfNews)
+            @Html.TextBoxFor(m => m.TypeOfNews, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CreatedDate)
+            @Html.TextBoxFor(m => m.CreatedDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { @class = "form-control", @Type = "datetime-local" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ModifiedDate)
+            @Html.TextBoxFor(m => m.ModifiedDate, "{0:yyyy-MM-ddTHH:mm:ss}", new { @class = "form-control", @Type = "datetime-local" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.UserId)
+            @Html.TextBoxFor(m => m.UserId, new { @class = "form-control " })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Status)
+            @Html.CheckBoxFor(m => m.Status)
+        </div>
+
+        <input class="btn btn-success" type="submit" value="Save">
+    }
+</div>
+
+<script>
+    CKEDITOR.replace("input-content")
+    CKFinder.setupCKEditor(null, '/ckfinder');
+    function BrowseServer(field) {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fileUrl) {
+            document.getElementById(field).value = fileUrl;
+        };
+        finder.popup();
+    }
+</script>
+

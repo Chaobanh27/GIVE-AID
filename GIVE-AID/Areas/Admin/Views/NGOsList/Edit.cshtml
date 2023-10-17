@@ -1,0 +1,63 @@
+﻿@model GIVE_AID.Areas.Admin.Models.NGOsListModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<div class="container" style="margin-top:100px;">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address)
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.City)
+            @Html.TextAreaFor(m => m.City, new { @class = "form-control", @id = "input-content" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Country)
+            @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Phone)
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+        </div>
+        <div class="form-group ">
+            @Html.LabelFor(m => m.UserId)
+            @Html.TextBoxFor(m => m.UserId, new { @class = "form-control ", @readonly = "readonly" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status)
+            @Html.CheckBoxFor(model => model.Status, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+        </div>
+
+        <input class="btn btn-success" type="submit" value="Save">
+    }
+</div>
+
+<script>
+    CKEDITOR.replace("input-content")
+    CKFinder.setupCKEditor(null, '/ckfinder');
+    function BrowseServer(field) {
+        var finder = new CKFinder();
+        finder.selectActionFunction = function (fileUrl) {
+            document.getElementById(field).value = fileUrl;
+        };
+        finder.popup();
+    }
+</script>
+

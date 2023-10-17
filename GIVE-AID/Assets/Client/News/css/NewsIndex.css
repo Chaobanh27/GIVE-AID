@@ -1,0 +1,79 @@
+
+/**{*/
+    /* font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
+    /*font-family: 'Merriweather', serif;
+    font-size: 18px;*/
+}
+
+/* news start */
+.news .container{
+    padding: 20px 0px;
+  }
+  .news .container .row{
+    max-width:1320px;
+    margin-left:0px;
+  }
+.news .container .news-header {
+        margin-bottom: 15px;
+        border-bottom: 3px solid #F3C151;
+    }
+  .news .container .news-left-content{
+    min-height: 441.68px;
+  }
+  .news .container .news-right-content {
+    max-height: 440px;
+  }
+  .news .container .news-right-content .row {
+    gap: 29.25px;
+  }
+  .news .container .news-right-content .news-img img{
+    max-width: 150px;
+    min-height: 127.29px;
+  }
+  .news .container .news-right-content .news-date{
+    color: lightslategrey;
+  }
+  /* news end */
+
+.news-category .container {
+    padding-left: 0px;
+}
+
+.news-category .container .news-item{
+    height: 150px;
+    cursor: pointer;
+}
+.news-category-header {
+    border-bottom: 3px solid #F3C151;
+}
+.news-category .container .news-item .news-image{
+    height: 150px;
+}
+.news-category .container .news-item .news-image img{
+    height: 150px;
+}
+.news-category .container .news-item .news-body{
+    padding: 5px;
+}
+.news-category .container .news-item .news-title{
+    height: 30px;
+    padding: 0;
+}
+.news-category .container .news-item .news-title h5{
+    font-weight:bold;
+
+}
+.news-category .container .news-item .news-description{
+    height: 80px;
+    padding: 0;
+}
+.news-category .container .news-item .news-footer{
+    justify-content: space-between;
+    height: 30px;
+}
+.news-category .container .list-group .list-group-item a{ 
+    color: black;
+}
+.news-category .container .list-group .list-group-item a:hover{
+    color: #60AF6D;
+}

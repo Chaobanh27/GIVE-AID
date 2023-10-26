@@ -15,7 +15,7 @@ namespace GIVE_AID.Models
             var from = ConfigurationManager.AppSettings["EmailFrom"];                 //địa chỉ email của mình
             var password = ConfigurationManager.AppSettings["EmailPassword"];         //password email của mình
 
-            var smtpClient = new SmtpClient("smtp.gmail.com", 587);                  // Thay thế smtp.example.com bằng SMTP server của bạn
+            var smtpClient = new SmtpClient("smtp.gmail.com", 587);                  
             smtpClient.Credentials = new NetworkCredential(from, password);
             smtpClient.EnableSsl = true;
 
